@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinFormsIosTest"
+             x:Class="XamarinFormsIosTest.MainPage">
+
+        <ContentPage.Resources>
+            
+            <local:DateTimeOffsetToDayConverter x:Key="DateTimeOffsetToDayConverter"/>
+            
+            <ControlTemplate x:Key="CalendarDayControlTemplate">
+            <Grid HorizontalOptions="Center">
+
+                <BoxView Color="LightGray"
+                         CornerRadius="5">
+
+                    <BoxView.Triggers>
+
+                        <DataTrigger TargetType="BoxView"
+                                     Binding="{TemplateBinding IsSelected}"
+                                     Value="True">
+                            <Setter Property="Color"
+                                    Value="Green" />
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="BoxView"
+                                     Binding="{TemplateBinding IsSelectable}"
+                                     Value="False">
+                            <Setter Property="Color"
+                                    Value="#f2f2f2" />
+                        </DataTrigger>
+
+                    </BoxView.Triggers>
+
+                </BoxView>
+
+                <BoxView Color="White"
+                         Margin="1"
+                         CornerRadius="5">
+
+                    <BoxView.Triggers>
+
+                        <DataTrigger TargetType="BoxView"
+                                     Binding="{TemplateBinding IsSelected}"
+                                     Value="True">
+                            <Setter Property="Color"
+                                    Value="LightGreen" />
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="BoxView"
+                                     Binding="{TemplateBinding IsSelectable}"
+                                     Value="False">
+                            <Setter Property="Color"
+                                    Value="#f2f2f2" />
+                        </DataTrigger>
+
+                    </BoxView.Triggers>
+
+                </BoxView>
+
+                <Label Text="{TemplateBinding Date, Converter={StaticResource DateTimeOffsetToDayConverter}}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="Medium"
+                       TextColor="Black">
+
+                    <Label.Triggers>
+
+                        <DataTrigger TargetType="Label"
+                                     Binding="{TemplateBinding IsSelectable}"
+                                     Value="False">
+                            <Setter Property="TextColor"
+                                    Value="Gray" />
+                        </DataTrigger>
+
+                    </Label.Triggers>
+
+                </Label>
+
+                <Ellipse WidthRequest="5"
+                         HeightRequest="5"
+                         VerticalOptions="End"
+                         HorizontalOptions="Center"
+                         Margin="0,0,0,5"
+                         IsVisible="False"
+                         Stroke="Red"
+                         Fill="Red">
+
+                    <Ellipse.Triggers>
+
+                        <DataTrigger TargetType="Ellipse"
+                                     Binding="{TemplateBinding BindingContext.HasAppointments}"
+                                     Value="True">
+                            <Setter Property="IsVisible"
+                                    Value="True" />
+                        </DataTrigger>
+
+                    </Ellipse.Triggers>
+
+                </Ellipse>
+
+            </Grid>
+        </ControlTemplate>
+            
+        </ContentPage.Resources>
+        
+    <StackLayout HorizontalOptions="Center"
+                 Margin="0,50,0,0">
+        
+        <local:CalendarDay x:Name="CalendarDay1"
+                           HorizontalOptions="Center"
+                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
+        <local:CalendarDay x:Name="CalendarDay2"
+                           HorizontalOptions="Center"
+                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
+        <local:CalendarDay x:Name="CalendarDay3"
+                           HorizontalOptions="Center"
+                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
+        <local:CalendarDay x:Name="CalendarDay4"
+                           HorizontalOptions="Center"
+                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
+        <local:CalendarDay x:Name="CalendarDay5"
+                           HorizontalOptions="Center"
+                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
+        <local:CalendarDay x:Name="CalendarDay6"
+                           HorizontalOptions="Center"
+                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
+        
+        <Button Text="set Opacity to 0"
+                Clicked="ButtonOpacityToZero_OnClicked"/>
+        
+        <Button Text="set Opacity to 1"
+                Clicked="ButtonOpacityToOne_OnClicked"/>
+        
+    </StackLayout>
+
+</ContentPage>
