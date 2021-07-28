@@ -24,7 +24,7 @@ namespace XamarinFormsIosTest
             CalendarDay6.Opacity = 0;
         }
         
-        private void ButtonOpacityToOne_OnClicked(object sender, EventArgs e)
+        private void ButtonOpacityToOneBroken_OnClicked(object sender, EventArgs e)
         {
             var random = new Random();
             
@@ -45,6 +45,29 @@ namespace XamarinFormsIosTest
             
             CalendarDay6.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
             CalendarDay6.Opacity = 1;
+        }
+        
+        private void ButtonOpacityToOneFixed_OnClicked(object sender, EventArgs e)
+        {
+            var random = new Random();
+            
+            CalendarDay1.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
+            CalendarDay1.FadeTo(1, 0);
+            
+            CalendarDay2.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
+            CalendarDay2.FadeTo(1, 0);
+            
+            CalendarDay3.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
+            CalendarDay3.FadeTo(1, 0);
+            
+            CalendarDay4.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
+            CalendarDay4.FadeTo(1, 0);
+            
+            CalendarDay5.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
+            CalendarDay5.FadeTo(1, 0);
+            
+            CalendarDay6.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
+            CalendarDay6.FadeTo(1, 0);
         }
     }
 }

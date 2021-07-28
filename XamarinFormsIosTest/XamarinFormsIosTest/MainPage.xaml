@@ -129,8 +129,11 @@
         <Button Text="set Opacity to 0"
                 Clicked="ButtonOpacityToZero_OnClicked"/>
         
-        <Button Text="set Opacity to 1"
-                Clicked="ButtonOpacityToOne_OnClicked"/>
+        <Button Text="set Opacity to 1 - broken"
+                Clicked="ButtonOpacityToOneBroken_OnClicked"/>
+        
+        <Button Text="set Opacity to 1 - fixed"
+                Clicked="ButtonOpacityToOneFixed_OnClicked"/>
         
     </StackLayout>
 
