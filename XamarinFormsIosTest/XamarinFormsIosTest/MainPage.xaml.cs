@@ -9,65 +9,72 @@ namespace XamarinFormsIosTest
 {
     public partial class MainPage : ContentPage
     {
+        private List<CalendarDay> _days = new List<CalendarDay>();
+        
         public MainPage()
         {
             InitializeComponent();
+
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    var calendarDay = new CalendarDay();
+                    calendarDay.ControlTemplate = Resources["CalendarDayControlTemplate"] as ControlTemplate;
+                    
+                    Grid.SetColumn(calendarDay, i);
+                    Grid.SetRow(calendarDay, j);
+                    
+                    GridDays.Children.Add(calendarDay);
+                    
+                    _days.Add(calendarDay);
+                }
+            }
         }
 
         private void ButtonOpacityToZero_OnClicked(object sender, EventArgs e)
         {
-            CalendarDay1.Opacity = 0;
-            CalendarDay2.Opacity = 0;
-            CalendarDay3.Opacity = 0;
-            CalendarDay4.Opacity = 0;
-            CalendarDay5.Opacity = 0;
-            CalendarDay6.Opacity = 0;
+            foreach (var calendarDay in _days)
+            {
+                calendarDay.Opacity = 0;
+            }
         }
         
         private void ButtonOpacityToOneBroken_OnClicked(object sender, EventArgs e)
         {
             var random = new Random();
             
-            CalendarDay1.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            CalendarDay1.Opacity = 1;
-            
-            CalendarDay2.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            CalendarDay2.Opacity = 1;
-            
-            CalendarDay3.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            CalendarDay3.Opacity = 1;
-            
-            CalendarDay4.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            CalendarDay4.Opacity = 1;
-            
-            CalendarDay5.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            CalendarDay5.Opacity = 1;
-            
-            CalendarDay6.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            CalendarDay6.Opacity = 1;
+            foreach (var calendarDay in _days)
+            {
+                calendarDay.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
+                calendarDay.Opacity = 1;
+            }
         }
         
-        private async void ButtonOpacityToOneFadeTo_OnClicked(object sender, EventArgs e)
+        private async void ButtonOpacityFadeToZero_OnClicked(object sender, EventArgs e)
+        {
+            var tasks = new List<Task>();
+
+            foreach (var calendarDay in _days)
+            {
+                tasks.Add(calendarDay.FadeTo(0, length: 0));
+            }
+
+            await Task.WhenAll(tasks);
+        }
+
+        private async void ButtonOpacityFadeToOne_OnClicked(object sender, EventArgs e)
         {
             var random = new Random();
-            
-            CalendarDay1.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            await CalendarDay1.FadeTo(1, 0);
-            
-            CalendarDay2.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            await CalendarDay2.FadeTo(1, 0);
-            
-            CalendarDay3.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            await CalendarDay3.FadeTo(1, 0);
-            
-            CalendarDay4.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            await CalendarDay4.FadeTo(1, 0);
-            
-            CalendarDay5.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            await CalendarDay5.FadeTo(1, 0);
-            
-            CalendarDay6.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
-            await CalendarDay6.FadeTo(1, 0);
+            var tasks = new List<Task>();
+
+            foreach (var calendarDay in _days)
+            {
+                calendarDay.Date = DateTimeOffset.Now.AddDays(random.Next(0, 10));
+                tasks.Add(calendarDay.FadeTo(1, length: 0));
+            }
+
+            await Task.WhenAll(tasks);
         }
     }
 }

@@ -1,14 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinFormsIosTest"
              x:Class="XamarinFormsIosTest.MainPage">
 
-        <ContentPage.Resources>
-            
-            <local:DateTimeOffsetToDayConverter x:Key="DateTimeOffsetToDayConverter"/>
-            
-            <ControlTemplate x:Key="CalendarDayControlTemplate">
+    <ContentPage.Resources>
+
+        <local:DateTimeOffsetToDayConverter x:Key="DateTimeOffsetToDayConverter" />
+
+        <ControlTemplate x:Key="CalendarDayControlTemplate">
             <Grid HorizontalOptions="Center">
 
                 <BoxView Color="LightGray"
@@ -101,40 +102,38 @@
 
             </Grid>
         </ControlTemplate>
-            
-        </ContentPage.Resources>
+
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+
+        <StackLayout HorizontalOptions="Center"
+                     Orientation="Horizontal"
+                     Margin="0,50,0,0">
+
+            <Button Text="Opacity = 0"
+                    BackgroundColor="Red"
+                    Clicked="ButtonOpacityToZero_OnClicked" />
+
+            <Button Text="Opacity = 1"
+                    BackgroundColor="Black"
+                    Clicked="ButtonOpacityToOneBroken_OnClicked" />
+
+            <Button Text="FadeTo = 0"
+                    BackgroundColor="Blue"
+                    Clicked="ButtonOpacityFadeToZero_OnClicked" />
+
+            <Button Text="FadeTo = 1"
+                    BackgroundColor="Brown"
+                    Clicked="ButtonOpacityFadeToOne_OnClicked" />
+
+        </StackLayout>
         
-    <StackLayout HorizontalOptions="Center"
-                 Margin="0,50,0,0">
-        
-        <local:CalendarDay x:Name="CalendarDay1"
-                           HorizontalOptions="Center"
-                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
-        <local:CalendarDay x:Name="CalendarDay2"
-                           HorizontalOptions="Center"
-                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
-        <local:CalendarDay x:Name="CalendarDay3"
-                           HorizontalOptions="Center"
-                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
-        <local:CalendarDay x:Name="CalendarDay4"
-                           HorizontalOptions="Center"
-                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
-        <local:CalendarDay x:Name="CalendarDay5"
-                           HorizontalOptions="Center"
-                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
-        <local:CalendarDay x:Name="CalendarDay6"
-                           HorizontalOptions="Center"
-                           ControlTemplate="{StaticResource CalendarDayControlTemplate}" />
-        
-        <Button Text="set Opacity to 0"
-                Clicked="ButtonOpacityToZero_OnClicked"/>
-        
-        <Button Text="set Opacity to 1 - using Opacity"
-                Clicked="ButtonOpacityToOneBroken_OnClicked"/>
-        
-        <Button Text="set Opacity to 1 - using FadeTo"
-                Clicked="ButtonOpacityToOneFadeTo_OnClicked"/>
-        
-    </StackLayout>
+        <Grid x:Name="GridDays" 
+              Grid.Row="1"
+              ColumnDefinitions="*,*,*,*,*,*"
+              RowDefinitions="*,*,*,*,*,*"/>
+
+    </Grid>
 
 </ContentPage>
